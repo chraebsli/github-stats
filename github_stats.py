@@ -78,7 +78,7 @@ class Queries(object):
                 "Authorization": f"token {self.access_token}",
             }
             if params is None:
-                params = dict()
+                params = {}
             if path.startswith("/"):
                 path = path[1:]
             try:
@@ -107,7 +107,7 @@ class Queries(object):
                         params=tuple(params.items()),
                     )
                     if r_requests.status_code == 202:
-                        print(f"A path returned 202. Retrying...")
+                        print('A path returned 202. Retrying...')
                         await asyncio.sleep(2)
                         continue
                     elif r_requests.status_code == 200:
@@ -374,7 +374,7 @@ Languages:
 
         # TODO: Improve languages to scale by number of contributions to
         #       specific filetypes
-        langs_total = sum([v.get("size", 0) for v in self._languages.values()])
+        langs_total = sum(v.get("size", 0) for v in self._languages.values())
         for k, v in self._languages.items():
             v["prop"] = 100 * (v.get("size", 0) / langs_total)
 
